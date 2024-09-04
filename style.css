@@ -1,16 +1,48 @@
-/* mengatur warna backgroud dan padding pada tag body bagian atas agar form tidak menempel diatas */
-body{
-	background: #383a3d;
-	padding-top: 10vh;	
+/* Mengatur warna latar belakang dan padding pada tag body bagian atas agar form tidak menempel di atas */
+body {
+    background: #383a3d;
+    padding-top: 10vh;
 }
 
-/* mengatur warna backgroud form */
-form{
-	background: #fff;
+/* Mengatur warna latar belakang form */
+form {
+    background: #fff;
 }
 
-/* mengatur border dan padding class form-container */
-.form-container{
-	border-radius: 10px;
-	padding: 30px;
+/* Mengatur border dan padding class form-container */
+.form-container {
+    border-radius: 10px;
+    padding: 30px;
+}
+
+/* Mengatur warna latar belakang dan border pada tabel detail */
+table {
+    background: #fff;
+    border-radius: 10px;
+    margin-top: 20px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Mengatur tampilan tombol kembali pada halaman detail */
+.btn-primary {
+    margin-top: 20px;
+}
+
+/* Mengatur lebar tabel pada halaman detail agar responsif */
+.table {
+    width: 100%;
+}
+
+/* Mengatur margin pada header halaman detail */
+h1 {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+/* Mengatur tampilan form dan elemen form pada halaman input */
+.form-control {
+    margin-bottom: 15px;
+}
+.card{
+	border-radius: 25px;
 }
