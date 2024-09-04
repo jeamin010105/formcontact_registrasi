@@ -6,31 +6,25 @@ $dbname = "registrasi";
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
+
 // Check connection
 if ($conn->connect_error) {
-  die("Connection failed: " . $conn->connect_error);
+    die("Connection failed: " . $conn->connect_error);
 }
 
-$query = mysqli_query($conn,"SELECT * FROM user ORDER BY id_user DESC");
+$query = mysqli_query($conn, "SELECT * FROM user ORDER BY id_user DESC");
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- meta tags -->
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
- 
-<!-- Bootstrap CSS -->
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-
-<!-- costum css -->
-<link rel="stylesheet" href="style.css">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style.css">
 </head>
- 
 <body>
     <section class="container-fluid">
-        <!-- justify-content-center untuk mengatur posisi form agar berada di tengah-tengah -->
         <section class="row justify-content-center">
         <section class="col-12">
         <div class="card text-center">
@@ -39,11 +33,19 @@ $query = mysqli_query($conn,"SELECT * FROM user ORDER BY id_user DESC");
         </div>
         <br/>
         <?php 
-            if(isset($_GET['pesan'])){
+            if (isset($_GET['pesan'])) {
                 $pesan = $_GET['pesan'];
-                if($pesan == "input"){
+                if ($pesan == "input") {
                     echo '<div class="alert alert-success" role="alert">
                             Data Berhasil Di Simpan!
+                          </div>';
+                } else if ($pesan == "delete") {
+                    echo '<div class="alert alert-success" role="alert">
+                            Data Berhasil Di Hapus!
+                          </div>';
+                } else if ($pesan == "update") {
+                    echo '<div class="alert alert-success" role="alert">
+                            Data Berhasil Di Update!
                           </div>';
                 }
             }
@@ -60,22 +62,26 @@ $query = mysqli_query($conn,"SELECT * FROM user ORDER BY id_user DESC");
                         <td>Kelas</td>
                         <td>Jenis Kelamin</td>
                         <td>Saran</td>
+                        <td>Aksi</td>
                     </tr>
                 </thead>
                 <tbody>
-                <?php if(mysqli_num_rows($query)>0){ ?>
+                <?php if (mysqli_num_rows($query) > 0) { ?>
                 <?php
                     $no = 1;
-                    while($data = mysqli_fetch_array($query)){
+                    while ($data = mysqli_fetch_array($query)) {
                 ?>
                     <tr>
                         <td><?php echo $no ?></td>
-                        <td><?php echo $data["nama"] ?></td>
-                        <td><?php echo $data["nim"] ?></td>
-                        <td><?php echo $data["email"] ?></td>
-                        <td><?php echo $data["kelas"] ?></td>
-                        <td><?php echo $data["jenis_kelamin"] ?></td>
-                        <td><?php echo $data["saran"] ?></td>            
+                        <td><?php echo htmlspecialchars($data["nama"]) ?></td>
+                        <td><?php echo htmlspecialchars($data["nim"]) ?></td>
+                        <td><?php echo htmlspecialchars($data["email"]) ?></td>
+                        <td><?php echo htmlspecialchars($data["kelas"]) ?></td>
+                        <td><?php echo htmlspecialchars($data["jenis_kelamin"]) ?></td>
+                        <td><?php echo htmlspecialchars($data["saran"]) ?></td>
+                        <td>
+                            <a href="view_detail.php?id=<?php echo $data['id_user']; ?>" class="btn btn-info btn-sm">Detail</a>
+                        </td>            
                     </tr>
                 <?php $no++; } ?>
                 <?php } ?>
@@ -90,9 +96,8 @@ $query = mysqli_query($conn,"SELECT * FROM user ORDER BY id_user DESC");
         </section>
     </section>
 
-    <!-- Bootstrap requirement jQuery pada posisi pertama, kemudian Popper.js, danyang terakhit Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
 </body>
 </html>
